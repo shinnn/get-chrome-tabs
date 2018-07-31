@@ -1,7 +1,7 @@
 'use strict';
 
 if (process.platform === 'darwin') {
-	const inspect = require('util').inspect;
+	const {inspect} = require('util');
 
 	const getStdout = require('execa').stdout;
 	const inspectWithKind = require('inspect-with-kind');
@@ -13,8 +13,11 @@ if (process.platform === 'darwin') {
 		['chromium', 'org.chromium.Chromium']
 	]);
 
-	module.exports = function getChromeTabs(option) {
-		if (option !== undefined) {
+	module.exports = function getChromeTabs(...args) {
+		const argLen = args.length;
+		const [option = {}] = args;
+
+		if (argLen === 1) {
 			if (!isPlainObj(option)) {
 				throw new TypeError(`Expected an <Object> to specify get-chrome-tabs option, but got ${
 					inspectWithKind(option)
@@ -30,8 +33,8 @@ if (process.platform === 'darwin') {
 					throw new RangeError(`${APP_ERROR}, but got neither of them ${inspect(option.app)}.`);
 				}
 			}
-		} else {
-			option = {};
+		} else if (argLen !== 0) {
+			throw new RangeError(`Expected 0 or 1 argument ([<Object>]), but got ${argLen} arguments.`);
 		}
 
 		const id = nameIdMap.get(option.app) || 'com.google.Chrome';

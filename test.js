@@ -7,8 +7,8 @@ const getChromeTabs = require('.');
 const clearModule = require('clear-module');
 const compact = require('lodash/compact');
 const last = require('lodash/last');
+const map = require('lodash/map');
 const pretendPlatform = require('pretend-platform');
-const property = require('lodash/property');
 const puppeteer = require('puppeteer');
 const test = require('tape');
 
@@ -45,25 +45,25 @@ test('getChromeTabs()', async t => {
 		);
 
 		t.deepEqual(
-			tabs.map(property('windowIndex')),
+			map(tabs, 'windowIndex'),
 			[0, 0, 1],
 			'should set number of window order to each item.'
 		);
 
 		t.deepEqual(
-			tabs.map(property('url')),
+			map(tabs, 'url'),
 			['http://127.0.0.1:3018/bar/', 'http://127.0.0.1:3018/baz/', 'http://127.0.0.1:3018/foo/'],
 			'should set page URL to each item.'
 		);
 
 		t.deepEqual(
-			tabs.map(property('title')),
+			map(tabs, 'title'),
 			['bar', 'baz', 'foo'],
 			'should set page title to each item.'
 		);
 
 		t.deepEqual(
-			tabs.map(property('active')),
+			map(tabs, 'active'),
 			[false, true, true],
 			'should set tab active state to each item.'
 		);
@@ -123,6 +123,17 @@ test('Argument validation', async t => {
 			err.toString(),
 			'RangeError: Expected `app` option to be either \'canary\' or \'chromium\', but got neither of them \'dartium\'.',
 			'should fail when `app` option is an unsupported value.'
+		);
+	}
+
+	try {
+		await getChromeTabs({}, {});
+		fail();
+	} catch (err) {
+		t.equal(
+			err.toString(),
+			'RangeError: Expected 0 or 1 argument ([<Object>]), but got 2 arguments.',
+			'should fail when it takes too many arguments.'
 		);
 	}
 
