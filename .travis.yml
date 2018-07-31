@@ -1,0 +1,13 @@
+os: osx
+osx_image: xcode9.4
+branches:
+  except: /^v\d/
+language: node_js
+node_js: node
+after_script: node_modules/.bin/nyc report --reporter=text-lcov | npx coveralls
+env:
+  global:
+    - COVERALLS_SERVICE_NAME=travis-pro
+    - secure: uXz0+JsN4cXbTT347bNK/wfYU0KYAjwi7n9JzyAEgoz8LeFaeHXTV8Fe+0X973SJIYugwubycdZskKju80EMxuBJzV6cvCkOWEirI0iEikwvKdbU6SR1m4pYehDQQryTI5zek06guaGgb/EtvhPdq53kH1fC+xNcMiMaLGgIX4c3apMlvkNtITOReFLW6hlrj7nNVn8GnvS8l2u24IKu7e7GFQdzeP5jcZAKvzyL2221S9+cXC5CpnvJrupUQOQo7QJIn16A6pO3Ptsek3Syo18O+RTUdF0bUzpdjWRKrnlnoj2TN+sUPZN4jnICkwHJo70Zy6V+69bX7KiJY2PJU7NCNe94jcBX5EwUYYUQOPhjnl+xl7HqAyZVnNlMAmr1zo1hrlXpYR/zG4MBa7eXyk6nSS+HFIZg7JetRWs96yjGhxKgAOWWLWuPzjG7r3CHabsl+ouM9z5uRv04Hr30w6QbJh0CGxuNdIkSNdDRSazHwwOZeka6qv2K2vWA1izYpkEONbp7RpmobD1mS6Q2DnFj38IXVWFBzvjYBctUmyi1qhdmAr11vfuhZzlirIeXR+oalBBF9PGI014v2zv6sMbF3B5KqPRwGjz80QiEldtHG5TvnnoDVQrE6cEZLdYvE7KTjy7TDWy7h2BKyeyghrG7k8l0VGkzwzm1rY8zHv8=
+addons:
+  chrome: stable
