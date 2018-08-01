@@ -1,6 +1,6 @@
 {
 	"name": "get-chrome-tabs",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Get information of the currently opened Chrome tabs, for example URLs and titles",
 	"repository": "shinnn/get-chrome-tabs",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
@@ -38,7 +38,7 @@
 		"lodash": "^4.17.10",
 		"nyc": "^12.0.2",
 		"pretend-platform": "^2.0.0",
-		"puppeteer": "^1.6.1",
+		"puppeteer": "^1.6.2",
 		"tape": "^4.9.1"
 	},
 	"eslintConfig": {
