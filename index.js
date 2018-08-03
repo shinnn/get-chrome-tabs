@@ -13,7 +13,7 @@ if (process.platform === 'darwin') {
 		['chromium', 'org.chromium.Chromium']
 	]);
 
-	module.exports = function getChromeTabs(...args) {
+	module.exports = async function getChromeTabs(...args) {
 		const argLen = args.length;
 		const [option = {}] = args;
 
@@ -38,47 +38,25 @@ if (process.platform === 'darwin') {
 		}
 
 		const id = nameIdMap.get(option.app) || 'com.google.Chrome';
-
-		return getStdout('osascript', [
+		const result = JSON.parse(await getStdout('osascript', [
 			'-l',
 			'JavaScript',
 			require.resolve('./jxa.js'),
 			id
-		]).then(stdout => { // eslint-disable-line promise/prefer-await-to-then
-			const result = JSON.parse(stdout);
+		]));
 
-			if (result.appNotRunning) {
-				const error = new Error(result.message);
-				error.code = 'ERR_APP_NOT_RUNNING';
-				error.bundleId = id;
+		if (result.appNotRunning) {
+			const error = new Error(result.message);
+			error.code = 'ERR_APP_NOT_RUNNING';
+			error.bundleId = id;
 
-				throw error;
-			}
-
-			return result;
-		});
-	};
-
-	/*
-	const re = /(?<=___###___message___###___).*(?=___###___message___###___)/;
-
-	module.exports = async function getChromeTabs(option) {
-		const message = (await getStderr('osascript', [
-			'-l',
-			'JavaScript',
-			require.resolve('./jxa.js'),
-			'com.Google.Chrome.canary'
-		])).match(re);
-
-		try {
-			return JSON.parse(message);
-		} catch {
-			throw new Error(message);
+			throw error;
 		}
+
+		return result;
 	};
-	*/
 } else {
-	module.exports = function getChromeTabs() {
+	module.exports = async function getChromeTabs() {
 		const platformName = require('platform-name');
 
 		const error = new Error(`get-chrome-tabs only supports macOS, but the current platform is ${
@@ -86,6 +64,6 @@ if (process.platform === 'darwin') {
 		}.`);
 		error.code = 'ERR_UNSUPPORTED_PLATFORM';
 
-		return Promise.reject(error);
+		throw error;
 	};
 }
