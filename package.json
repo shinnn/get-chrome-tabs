@@ -1,6 +1,6 @@
 {
 	"name": "get-chrome-tabs",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Get information of the currently opened Chrome tabs, for example URLs and titles",
 	"repository": "shinnn/get-chrome-tabs",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
@@ -34,7 +34,7 @@
 	"devDependencies": {
 		"@shinnn/eslint-config-node": "^6.0.0",
 		"clear-module": "^3.0.0",
-		"eslint": "^5.2.0",
+		"eslint": "^5.3.0",
 		"lodash": "^4.17.10",
 		"nyc": "^12.0.2",
 		"pretend-platform": "^2.0.0",
@@ -42,33 +42,6 @@
 		"tape": "^4.9.1"
 	},
 	"eslintConfig": {
-		"extends": "@shinnn/node",
-		"overrides": [
-			{
-				"files": [
-					"jxa.js"
-				],
-				"globals": {
-					"$": false,
-					"Application": false
-				},
-				"rules": {
-					"new-cap": [
-						"error",
-						{
-							"capIsNewExceptions": [
-								"Application"
-							]
-						}
-					],
-					"no-unused-vars": [
-						"error",
-						{
-							"varsIgnorePattern": "^run$"
-						}
-					]
-				}
-			}
-		]
+		"extends": "@shinnn/node"
 	}
 }
