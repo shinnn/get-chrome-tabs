@@ -8,6 +8,7 @@ if (process.platform === 'darwin') {
 	const isPlainObj = require('is-plain-obj');
 
 	const APP_ERROR = 'Expected `app` option to be either \'canary\' or \'chromium\'';
+	const execFileOption = {timeout: 10000};
 	const nameIdMap = new Map([
 		['canary', 'com.google.Chrome.canary'],
 		['chromium', 'org.chromium.Chromium']
@@ -43,7 +44,7 @@ if (process.platform === 'darwin') {
 			'JavaScript',
 			require.resolve('./jxa.js'),
 			id
-		]));
+		], execFileOption));
 
 		if (result.appNotRunning) {
 			const error = new Error(result.message);
@@ -56,9 +57,9 @@ if (process.platform === 'darwin') {
 		return result;
 	};
 } else {
-	module.exports = async function getChromeTabs() {
-		const platformName = require('platform-name');
+	const platformName = require('platform-name');
 
+	module.exports = async function getChromeTabs() {
 		const error = new Error(`get-chrome-tabs only supports macOS, but the current platform is ${
 			platformName()
 		}.`);
