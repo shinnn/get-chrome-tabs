@@ -26,7 +26,6 @@
 		"async"
 	],
 	"dependencies": {
-		"execa": "^0.10.0",
 		"inspect-with-kind": "^1.0.4",
 		"is-plain-obj": "^1.1.0",
 		"platform-name": "^1.0.0"

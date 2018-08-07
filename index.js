@@ -1,9 +1,9 @@
 'use strict';
 
 if (process.platform === 'darwin') {
-	const {inspect} = require('util');
+	const {inspect, promisify} = require('util');
+	const {execFile} = require('child_process');
 
-	const getStdout = require('execa').stdout;
 	const inspectWithKind = require('inspect-with-kind');
 	const isPlainObj = require('is-plain-obj');
 
@@ -13,6 +13,7 @@ if (process.platform === 'darwin') {
 		['canary', 'com.google.Chrome.canary'],
 		['chromium', 'org.chromium.Chromium']
 	]);
+	const promisifiedExecFile = promisify(execFile);
 
 	module.exports = async function getChromeTabs(...args) {
 		const argLen = args.length;
@@ -39,12 +40,12 @@ if (process.platform === 'darwin') {
 		}
 
 		const id = nameIdMap.get(option.app) || 'com.google.Chrome';
-		const result = JSON.parse(await getStdout('osascript', [
+		const result = JSON.parse((await promisifiedExecFile('osascript', [
 			'-l',
 			'JavaScript',
 			require.resolve('./jxa.js'),
 			id
-		], execFileOption));
+		], execFileOption)).stdout);
 
 		if (result.appNotRunning) {
 			const error = new Error(result.message);
