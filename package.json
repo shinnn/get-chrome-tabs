@@ -1,6 +1,6 @@
 {
 	"name": "get-chrome-tabs",
-	"version": "0.3.1",
+	"version": "1.0.0",
 	"description": "Get information of the currently opened Chrome tabs, for example URLs and titles",
 	"repository": "shinnn/get-chrome-tabs",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
