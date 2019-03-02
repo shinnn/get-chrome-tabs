@@ -43,7 +43,7 @@ const getChromeTabs = require('get-chrome-tabs');
 
 ## Installation
 
-[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/about-npm/).
 
 ```
 npm install get-chrome-tabs
@@ -62,7 +62,7 @@ Return: `Promise<Array<Object>>`
 
 *macOS with [JXA](https://github.com/JXA-Cookbook/JXA-Cookbook#readme) support is required.*
 
-Each object included in the resultant array has the following properties:
+Each `Object` included in the resultant array has the following properties:
 
 * windowIndex `integer` – An index of the window which contains the tab (`0` (foremost), `1`, ...)
 * windowVisible `boolean` – Whether the window which contains the tab is visible or not
@@ -96,4 +96,4 @@ Instead of Chrome (default), refer to [Chrome Canary](https://www.google.com/chr
 
 ## License
 
-[ISC License](./LICENSE) © 2018 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2018 - 2019 Shinnosuke Watanabe

@@ -99,7 +99,7 @@ test('Argument validation', async t => {
 	} catch (err) {
 		t.equal(
 			err.toString(),
-			'TypeError: Expected an <Object> to specify get-chrome-tabs option, but got Uint32Array [  ].',
+			'TypeError: Expected an <Object> to specify get-chrome-tabs option, but got Uint32Array [].',
 			'should fail when it takes a non-object argument.'
 		);
 	}
