@@ -1,7 +1,6 @@
+if: branch !~ ^v\d
 os: osx
 osx_image: xcode10.1
-branches:
-  except: /^v\d/
 language: node_js
 node_js: node
 after_success: node_modules/.bin/nyc report | npx coveralls
