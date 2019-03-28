@@ -1,6 +1,6 @@
 if: branch !~ ^v\d
 os: osx
-osx_image: xcode10.1
+osx_image: xcode10.2
 language: node_js
 node_js: node
 addons:
