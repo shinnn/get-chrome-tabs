@@ -1,9 +1,8 @@
 if: branch !~ ^v\d
 os: osx
-osx_image: xcode10.2
+osx_image: xcode10.1
 language: node_js
 node_js: node
 addons:
   chrome: stable
 cache: npm
-after_success: node_modules/.bin/nyc report | npx coveralls
